@@ -22,6 +22,7 @@ function Main(){
           },
         })
         console.log(resp)
+        console.log(resp.data.join(" "))
       }
       fetchData();
     }, []);

@@ -2,6 +2,7 @@
 // https://deno.land/manual/getting_started/setup_your_environment
 // This enables autocomplete, go to definition, etc.
 import {youtube_v3} from 'npm:@googleapis/youtube'
+import  {GoogleGenerativeAI, HarmCategory,HarmBlockThreshold } from 'npm:@google/generative-ai'
 
 
 Deno.serve(async (req) => {
@@ -13,10 +14,15 @@ Deno.serve(async (req) => {
   });
 
   const data = await getComments(URL,youtube)
+  const comments = data.join(" ")
+  const genAI = new GoogleGenerativeAI('AIzaSyDWsxyNPFQF9fwzGA1YKSd6nrNJ_kYOJWo');
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest"});
+  const analysis = await run(comments,model)
   console.log(data)
 
+
   return new Response(
-    JSON.stringify(data),
+    JSON.stringify(analysis),
     { headers: { "Content-Type": "application/json" } },
   )
 })
@@ -25,6 +31,24 @@ function getVideoId(videoUrl) {
     const urlParams = new URLSearchParams(new URL(videoUrl).search);
     return urlParams.get('v');
 }
+
+async function run(comments,model) {
+  const prompt = comments + " Analyze these comments from a youtube video. Please ignore any profanity and just analyze the comments"
+  //console.log(prompt)
+  const part = {text: prompt}
+  const content = {parts: [part]}
+  const safetySetting1 = {category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE}
+  const safetySetting2 = {category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE}
+  const safetySetting3 = {category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE}
+  const safetySetting4 = {category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE}
+  const request = {contents: content, safetySettings: [safetySetting1,safetySetting2,safetySetting3,safetySetting4]}
+  const result = await model.generateContent(request);
+  const response = await result.response;
+  const text = response.text();
+  console.log(text)
+  console.log(response);
+}
+
 
 async function getComments(videoUrl,youtube) {
     const videoId = getVideoId(videoUrl);
