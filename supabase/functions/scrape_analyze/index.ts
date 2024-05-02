@@ -5,6 +5,10 @@ import {youtube_v3} from 'npm:@googleapis/youtube'
 import  {GoogleGenerativeAI, HarmCategory,HarmBlockThreshold } from 'npm:@google/generative-ai'
 
 
+const supabaseUrl = 'https://sbsrmviczmtuiuaxmyfd.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNic3Jtdmljem10dWl1YXhteWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM2NDc2MTcsImV4cCI6MjAyOTIyMzYxN30.zw6ptFve9lTU9fTbtftdh6lURpQgGyF6hAObl1PwqG0';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 Deno.serve(async (req) => {
   const { URL } = await req.json()
 
@@ -13,6 +17,13 @@ Deno.serve(async (req) => {
     auth: API_KEY
   });
 
+  const existingSummary = await getSummaryFromDB(URL);
+  if (existingSummary) {
+    return new Response(JSON.stringify({ summary: existingSummary }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   const data = await getComments(URL,youtube)
   const comments = data.join(" ")
   const genAI = new GoogleGenerativeAI('AIzaSyDWsxyNPFQF9fwzGA1YKSd6nrNJ_kYOJWo');
@@ -20,6 +31,7 @@ Deno.serve(async (req) => {
   const analysis = await run(comments,model)
   console.log(data)
 
+  await storeSummaryInDB(URL, analysis);
 
   return new Response(
     JSON.stringify(analysis),
@@ -89,6 +101,37 @@ async function getComments(videoUrl,youtube) {
     }
 
     return comments;
+
+}
+
+async function getSummaryFromDB(videoUrl) {
+    const { data, error } = await supabase
+      .from('video_summaries')
+      .select('summary')
+      .eq('video_url', videoUrl)
+      .single();
+  
+    if (error) {
+      console.error('Error fetching summary from database:', error);
+      return null;
+    }
+  
+    return data ? data.summary : null;
+}
+
+async function storeSummaryInDB(videoUrl, summary) {
+    const { data, error } = await supabase
+      .from('video_summaries')
+      .insert([
+        { video_url: videoUrl, summary: summary }
+      ]);
+  
+    if (error) {
+      console.error('Error storing summary in database:', error);
+      return null;
+    }
+  
+    return data;
 }
 
 

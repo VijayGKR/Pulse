@@ -15,7 +15,8 @@
     "googleapis": "^134.0.0",
     "plasmo": "^0.85.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "supabase": "^1.165.0"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.1.1",
