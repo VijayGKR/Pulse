@@ -60,6 +60,7 @@ async function run(comments,model) {
   const text = response.text();
   console.log(text)
   console.log(response);
+  return text
 }
 
 
