@@ -10,7 +10,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   // Usage example (put your video URL here)
   //const comments = getComments(URL,youtube)
 
-  const {data,error} = await supabase.functions.invoke('scrape_analyze', {
+  const {data,error} = await supabase.functions.invoke('db-store', {
     body: {
       URL : URL
     },
