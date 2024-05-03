@@ -19,6 +19,22 @@ Ever wanted to quickly grasp the community's reaction to a YouTube video without
 ## How It Works
 Pulse efficiently scans all comments on a YouTube video, utilizing the advanced natural language processing capabilities of Google Gemini 1.5. This technology enables Pulse to generate comprehensive summaries that encapsulate the core themes and sentiments of viewer discussions. With this tool, the need for repetitive summarization using small context windows and outdated algorithms is eliminated. Pulse delivers highly accurate, detailed summaries informed by every comment, providing a complete overview of viewer feedback in one go.
 
+## Why It's Better
+
+### Preservation of Nuance
+One of the standout advantages of using Pulse is its ability to maintain the nuance in viewer comments, which is often lost in traditional summarization methods. Traditional approaches typically involve multiple rounds of summarization to handle large data sets, which can dilute the complexity and depth of the original comments. Each round of summarization risks stripping away layers of context and sentiment, potentially leading to a final summary that lacks the subtlety and richness of the original discussions.
+
+Pulse, powered by Google Gemini 1.5, avoids these pitfalls by processing all comments in a single, expansive context window. This approach ensures that every nuance, whether a subtle shift in tone or a complex thematic element, is captured and reflected in the summary. By maintaining the integrity of the original comments, Pulse provides content creators and viewers with a deeper, more accurate understanding of the audience's reactions and sentiments.
+
+### Efficiency and Accuracy
+Furthermore, Pulse's single-pass summarization is not only more efficient but also more accurate. It reduces processing time and computational overhead, making it a practical tool for both content creators who need quick feedback and viewers who desire a quick grasp of the community's pulse. This efficiency does not compromise the quality of the output; instead, it enhances it by ensuring that the generated summaries are both comprehensive and timely, enabling users to react and adapt more swiftly to their audience's needs.
+
+### Flexible and Cost-Effective Updates
+Pulse offers flexible update schedules, allowing content creators to choose how frequently their video comments are summarized—from daily to weekly updates, depending on their preference. This flexibility helps in managing costs effectively, as each video is processed only as often as necessary. Once a video's comments are summarized, these summaries are stored and made available to subscribers extremely quickly, enhancing viewer engagement without redundant processing. Additionally, Pulse can asynchronously summarize comments across an entire video library, making it an ideal solution for creators with extensive content who wish to maintain engagement and understand viewer sentiment across all their videos. This asynchrony ensures that summaries are always up-to-date and ready when creators and viewers need them, providing a seamless and efficient user experience.
+
+
+Pulse represents a significant advancement in comment analysis, offering a robust solution that meets the demands of today's dynamic and content-rich digital landscape.
+
 ## Subscription Model
 
 ### Content Creators:
@@ -48,19 +64,3 @@ Open your browser and load the appropriate development build. For example, if yo
 You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
 
 For further guidance, [visit our Documentation](https://docs.plasmo.com/)
-
-## Making production build
-
-Run the following:
-
-```bash
-pnpm build
-# or
-npm run build
-```
-
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
-
-## Submit to the webstores
-
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
