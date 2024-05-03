@@ -18,7 +18,7 @@ Deno.serve(async (req) => {
   const genAI = new GoogleGenerativeAI('AIzaSyDWsxyNPFQF9fwzGA1YKSd6nrNJ_kYOJWo');
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest"});
   const analysis = await run(comments,model)
-  console.log(data)
+  //console.log(data)
 
 
   return new Response(
@@ -45,8 +45,9 @@ async function run(comments,model) {
   const result = await model.generateContent(request);
   const response = await result.response;
   const text = response.text();
-  console.log(text)
-  console.log(response);
+  //console.log(text)
+  //console.log(response);
+  return text
 }
 
 
