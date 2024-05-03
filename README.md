@@ -1,4 +1,4 @@
-# Pulse
+<img src="images/576428e4-56da-4179-ac94-45a14dce12f3.webp" width="200" height="200">
 
 ## Introduction
 Ever wanted to quickly grasp the community's reaction to a YouTube video without wading through hundreds or thousands of comments? Pulse is here to revolutionize how we understand audience feedback. This powerful extension leverages the advanced capabilities of Google Gemini 1.5, with its vast 1 million context token window, to deliver comprehensive summaries of YouTube comments. Perfect for both video consumers and content creators, Pulse provides an accurate and nuanced summary, capturing the key sentiments and insights from even the largest comment sections.
