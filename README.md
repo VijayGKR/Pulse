@@ -1,4 +1,4 @@
-<img src="images/576428e4-56da-4179-ac94-45a14dce12f3.webp" width="200" height="200">
+<img src="images/logo.webp" width="200" height="200">
 
 ## Introduction
 Ever wanted to quickly grasp the community's reaction to a YouTube video without wading through hundreds or thousands of comments? Pulse is here to revolutionize how we understand audience feedback. This powerful extension leverages the advanced capabilities of Google Gemini 1.5, with its vast 1 million context token window, to deliver comprehensive summaries of YouTube comments. Perfect for both video consumers and content creators, Pulse provides an accurate and nuanced summary, capturing the key sentiments and insights from even the largest comment sections.
@@ -59,6 +59,23 @@ pnpm dev
 npm run dev
 ```
 
-Then open your browser and load the appropriate development build. Since this a Chrome extension, click on the 3 dots that indicate settings, then scroll to extensions. Click on "Manage Extensions". Then click on load unpacked extensions. You will see the ability to load Pulse there from this file located here. Afterwards, just click on the extension when on youtube video and wait for the analysis (or get it immediately if it's a previously seen video). 
+Then open your browser and load the appropriate development build. Since this a Chrome extension, click on the 3 dots that indicate settings, then scroll to extensions. 
+
+
+Click on "Manage Extensions".
+
+![manage](images/manage%20extensions.png)
+
+
+Then click on load unpacked extensions. 
+
+![load](images/Extensions.png)
+ 
+ 
+You will see the ability to load Pulse there. Navigate to your pulse repository on your computer, then select this folder to upload.
+
+![folder](images/folder.png)
+
+Afterwards, just click on the extension when on youtube video and wait for the analysis (or get it immediately if it's a previously seen video). 
 
 
