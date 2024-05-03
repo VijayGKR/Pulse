@@ -78,6 +78,6 @@ You will see the ability to load Pulse there. Navigate to your pulse repository 
 
 ![folder](images/folder.png)
 
-Afterwards, just click on the extension when on youtube video and wait for the analysis (or get it immediately if it's a previously seen video). 
+Afterwards, just click on the extension when on a youtube video and wait for the analysis (or get it immediately if it's a previously seen video). 
 
 
