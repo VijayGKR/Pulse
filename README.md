@@ -59,6 +59,6 @@ pnpm dev
 npm run dev
 ```
 
-Then open your browser and load the appropriate development build. Since this a Chrome extension, click on the 3 dots that indicate settings, then scroll to extensions. You will see the ability to load Pulse there. Afterwards, just click on the extension when on youtube video and wait for the analysis (or get it immediately if it's a previously seen video).
+Then open your browser and load the appropriate development build. Since this a Chrome extension, click on the 3 dots that indicate settings, then scroll to extensions. Click on "Manage Extensions". Then click on load unpacked extensions. You will see the ability to load Pulse there from this file located here. Afterwards, just click on the extension when on youtube video and wait for the analysis (or get it immediately if it's a previously seen video). 
 
 
