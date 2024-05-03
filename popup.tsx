@@ -1,44 +1,51 @@
-import { useState, useEffect } from 'react'
-import styleText from 'data-text:../style.css'
-import type { PlasmoCSConfig } from 'plasmo'
-import { sendToBackground, sendToContentScript } from '@plasmohq/messaging'
-import { useMessage } from '@plasmohq/messaging/hook'
-
+import { useState, useEffect } from 'react';
+import { sendToContentScript } from '@plasmohq/messaging';
+import React from 'react';
+import { Remarkable } from 'remarkable';
 
 export default function IndexPopup() {
-  const [data, setData] = useState("")
+  const [commentAnalysis, setCommentAnalysis] = useState("Loading analysis...");
 
   useEffect(() => {
     async function fetchData() {
-      console.log("test")
-      const resp = await sendToBackground({
-        name: 'router',
-        body: {
-          URL: 'https://www.youtube.com/watch?v=PPCfDe8TfJQ'
-        },
-      })
-      console.log(resp)
+      console.log("Fetching data...");
+      try {
+        const response = await sendToContentScript({
+          name: 'main',
+        });
+        if (response) {
+          console.log("Response received:", response);
+          setCommentAnalysis(response);  // Directly use the response as text
+        } else {
+          setCommentAnalysis("Still Fetching");
+          console.log("No data received");
+        }
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+        setCommentAnalysis("Failed to load analysis.");  // Set error message if the fetch fails
+      }
     }
     fetchData();
   }, []);
 
-  console.log("hi")
+  const md = new Remarkable();
+  const getMarkdownText = () => {
+    return { __html: md.render(commentAnalysis) };
+  };
+  
+
   return (
-    <div
-      style={{
-        padding: 16
-      }}>
-      <h2>
-        Welcome to your{" "}
-        <a href="https://www.plasmo.com" target="_blank">
-          Plasmo
-        </a>{" "}
-        Extension!
-      </h2>
-      <input onChange={(e) => setData(e.target.value)} value={data} />
-      <a href="https://docs.plasmo.com" target="_blank">
-        View Docs
-      </a>
+    <div style={{
+      padding: 16,
+      minWidth: "400px", // Increased width
+      margin: "auto",
+      fontSize: "14px", // Smaller font size
+      border: "1px solid #ccc", // Optional: adds a border to make the rounded corners more visible
+      backgroundColor: "#fff", // Optional: adds a background color
+      boxShadow: "0 2px 5px rgba(0,0,0,0.1)" // Optional: adds a slight shadow for depth
+    }}>
+      <h2 style={{ fontSize: "18px" }}>Comment Analysis</h2>
+      <div dangerouslySetInnerHTML={getMarkdownText()} />
     </div>
-  )
+  );
 }

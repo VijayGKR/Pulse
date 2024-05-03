@@ -5,7 +5,7 @@ import {youtube_v3} from 'npm:@googleapis/youtube'
 import  {GoogleGenerativeAI, HarmCategory,HarmBlockThreshold } from 'npm:@google/generative-ai'
 
 
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from 'npm:@supabase/supabase-js'
 
 
 const supabase = createClient('https://sbsrmviczmtuiuaxmyfd.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNic3Jtdmljem10dWl1YXhteWZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM2NDc2MTcsImV4cCI6MjAyOTIyMzYxN30.zw6ptFve9lTU9fTbtftdh6lURpQgGyF6hAObl1PwqG0')
@@ -20,7 +20,7 @@ Deno.serve(async (req) => {
 
   const existingSummary = await getSummaryFromDB(URL);
   if (existingSummary) {
-    return new Response(JSON.stringify({ summary: existingSummary }), {
+    return new Response(JSON.stringify(existingSummary), {
       headers: { "Content-Type": "application/json" },
     });
   }
