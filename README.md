@@ -51,7 +51,9 @@ Join the revolution in video comment analysis and never miss the pulse of your a
 
 This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
 
-First, run the development server:
+First, clone this github repo to your local machine.
+
+Once you've cloned the repo, run the development server where the repo is located.
 
 ```bash
 pnpm dev
