@@ -107,18 +107,29 @@ async function getComments(videoUrl,youtube) {
 }
 
 async function getSummaryFromDB(videoUrl) {
-    const { data, error } = await supabase
-      .from('video_summaries')
-      .select('summary')
-      .eq('video_url', videoUrl)
-      .single();
-  
-    if (error) {
-      console.error('Error fetching summary from database:', error);
-      return null;
-    }
-  
-    return data ? data.summary : null;
+  const { data, error } = await supabase
+  .from('video_summaries')
+  .select('summary')
+  .eq('video_url', videoUrl);
+
+  if (error) {
+    console.error('Error fetching summary from database:', error);
+    return null;
+  }
+
+  if (data.length === 0) {
+    console.warn('No summary found for this video URL');
+    return null;
+  }
+
+  if (data.length > 1) {
+    console.warn('Multiple summaries found for this video URL');
+    // You can choose to handle multiple rows differently, such as returning the first one:
+    return data[0].summary;
+  }
+
+  return data[0].summary;
+
 }
 
 async function storeSummaryInDB(videoUrl, summary) {

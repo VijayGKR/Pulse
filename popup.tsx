@@ -14,19 +14,22 @@ export default function IndexPopup() {
           name: 'main',
         });
         if (response) {
-          console.log("Response received:", response);
-          setCommentAnalysis(response);  // Directly use the response as text
+          console.log("Response received:", response.data);
+          setCommentAnalysis(response.data); // Directly use the response as text
         } else {
           setCommentAnalysis("Still Fetching");
           console.log("No data received");
+          setTimeout(fetchData, 500); // Wait 500 ms before calling fetchData again
         }
       } catch (error) {
         console.error("Failed to fetch data:", error);
-        setCommentAnalysis("Failed to load analysis.");  // Set error message if the fetch fails
+        setCommentAnalysis("Failed to load analysis."); // Set error message if the fetch fails
       }
     }
+  
     fetchData();
   }, []);
+  
 
   const md = new Remarkable();
   const getMarkdownText = () => {

@@ -22,10 +22,5 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   })
 }
 
-function getVideoId(videoUrl) {
-  const urlParams = new URLSearchParams(new URL(videoUrl).search);
-  return urlParams.get('v');
-}
-
 
 export default handler
